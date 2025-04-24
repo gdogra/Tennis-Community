@@ -2,69 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login | Tennis Community</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Tennis Community</title>
   <link rel="stylesheet" href="/css/auth.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js"></script>
 </head>
 <body>
-  <div class="auth-container">
-    <h2>Tennis Community Login</h2>
-
-    <!-- 🔐 Login Form -->
+  <div class="login-container">
+    <div id="lottie-bg" class="login-animation"></div>
     <form id="login-form">
-      <input
-        type="email"
-        id="login-email"
-        name="email"
-        placeholder="Email"
-        required
-        autocomplete="email"
-        title="Enter your registered email"
-      />
-      <input
-        type="password"
-        id="login-password"
-        name="password"
-        placeholder="Password"
-        required
-        autocomplete="current-password"
-        title="Enter your password"
-      />
-      <button type="submit" class="btn login-btn">Log In</button>
-    </form>
-
-    <!-- 🌐 Google Login -->
-    <button id="google-login" class="btn google-btn" title="Login using your Google account">
-      Log in with Google
-    </button>
-
-    <hr />
-
-    <!-- 📝 Registration Form -->
-    <form id="signup-form">
-      <input
-        type="email"
-        id="signup-email"
-        name="email"
-        placeholder="Email"
-        required
-        autocomplete="email"
-        title="Enter your email to sign up"
-      />
-      <input
-        type="password"
-        id="signup-password"
-        name="password"
-        placeholder="Password"
-        required
-        autocomplete="new-password"
-        title="Use at least 6 characters including a number"
-      />
-      <button type="submit" class="btn signup-btn">Sign Up</button>
+      <h2>Welcome Back</h2>
+      <input type="email" placeholder="Email" id="login-email" required autocomplete="email" title="Enter your email" />
+      <input type="password" placeholder="Password" id="login-password" required autocomplete="current-password" title="Enter your password" />
+      <button type="submit">Log In</button>
+      <button type="button" id="google-login" class="google-btn">Log in with Google</button>
     </form>
   </div>
-
   <script src="/js/auth.js" type="module"></script>
+  <script>
+    lottie.loadAnimation({
+      container: document.getElementById('lottie-bg'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/assets/login-animation.json'
+    });
+  </script>
 </body>
 </html>
-
