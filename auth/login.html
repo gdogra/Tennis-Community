@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login | Tennis Community</title>
   <link rel="stylesheet" href="/css/auth.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <div class="container">
@@ -26,7 +25,8 @@
     <button id="logout-btn" style="display:none;">Log Out</button>
   </div>
 
-  <script src="/js/auth.js"></script>
+  <!-- 🔐 Use type="module" to allow ES6 imports -->
+  <script type="module" src="/js/auth.js"></script>
 </body>
 </html>
 
