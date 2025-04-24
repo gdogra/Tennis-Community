@@ -2,102 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login | Tennis Community</title>
   <link rel="stylesheet" href="/css/auth.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f7fa;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .auth-card {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    input {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 10px;
-      background-color: #0070f3;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #005ac1;
-    }
-
-    .google-btn {
-      background-color: #db4437;
-      margin-top: 16px;
-    }
-
-    .google-btn:hover {
-      background-color: #c53727;
-    }
-
-    #logout-btn {
-      margin-top: 20px;
-      background-color: #666;
-    }
-  </style>
 </head>
 <body>
-  <div class="auth-card">
+  <div class="auth-container">
     <h2>Tennis Community Login</h2>
 
-    <form id="signup-form">
-      <input type="email" id="signup-email" placeholder="Email" required />
-      <input type="password" id="signup-password" placeholder="Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
-
+    <!-- 🔐 Login Form -->
     <form id="login-form">
-      <input type="email" id="login-email" placeholder="Email" required />
-      <input type="password" id="login-password" placeholder="Password" required />
-      <button type="submit">Log In</button>
+      <input
+        type="email"
+        id="login-email"
+        name="email"
+        placeholder="Email"
+        required
+        autocomplete="email"
+        title="Enter your registered email"
+      />
+      <input
+        type="password"
+        id="login-password"
+        name="password"
+        placeholder="Password"
+        required
+        autocomplete="current-password"
+        title="Enter your password"
+      />
+      <button type="submit" class="btn login-btn">Log In</button>
     </form>
 
-    <button id="google-login" class="google-btn">Log in with Google</button>
-    <button id="logout-btn" style="display:none;">Log Out</button>
+    <!-- 🌐 Google Login -->
+    <button id="google-login" class="btn google-btn" title="Login using your Google account">
+      Log in with Google
+    </button>
+
+    <hr />
+
+    <!-- 📝 Registration Form -->
+    <form id="signup-form">
+      <input
+        type="email"
+        id="signup-email"
+        name="email"
+        placeholder="Email"
+        required
+        autocomplete="email"
+        title="Enter your email to sign up"
+      />
+      <input
+        type="password"
+        id="signup-password"
+        name="password"
+        placeholder="Password"
+        required
+        autocomplete="new-password"
+        title="Use at least 6 characters including a number"
+      />
+      <button type="submit" class="btn signup-btn">Sign Up</button>
+    </form>
   </div>
 
-  <!-- ✅ Load Supabase first -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- ✅ Then load your logic -->
-  <script src="/js/auth.js" defer></script>
+  <script src="/js/auth.js" type="module"></script>
 </body>
 </html>
 
