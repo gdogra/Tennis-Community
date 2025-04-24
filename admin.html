@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel | Tennis Community</title>
+  <link rel="stylesheet" href="/css/auth.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Panel</h1>
+    <p id="admin-message">Checking access...</p>
+
+    <div id="players-section" style="display: none;">
+      <h2>Player Management</h2>
+      <table id="players-table" border="1" cellpadding="6">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Skill Level</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody id="players-body">
+          <!-- Players will be populated here -->
+        </tbody>
+      </table>
+    </div>
+
+    <button id="logout-btn">Log Out</button>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+      'https://tvdiznpwmmimcwywaxew.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2ZGl6bnB3bW1pbWN3eXdheGV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NjQ0MDQsImV4cCI6MjA2MTA0MDQwNH0.btc5JdXafOs-eqEo828aAxWOf3iBCPqCO6DDFe0WjWc'
+    );
+
+    const message = document.getElementById('admin-message');
+    const playersSection = document.getElementById('players-section');
+    const playersBody = document.getElementById('players-body');
+
+    // Auth + role check
+    const { data: { user }, error } = await supabase.auth.getUser();
+    if (!user) {
+      message.innerText = 'Please log in.';
+      window.location.href = '/auth/login.html';
+    }
+
+    const { data: role, error: roleErr } = await supabase
+      .from('user_roles')
+      .select('is_admin')
+      .eq('id', user.id)
+      .single();
+
+    if (roleErr || !role?.is_admin) {
+      message.innerText = 'Access denied.';
+      setTimeout(() => window.location.href = '/', 2000);
+    } else {
+      message.innerText = 'Welcome, Admin!';
+      playersSection.style.display = 'block';
+
+      // Load players
+      const { data: players, error: playerErr } = await supabase
+        .from('players')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (playerErr) {
+        playersBody.innerHTML = `<tr><td colspan="4">Error loading players: ${playerErr.message}</td></tr>`;
+      } else {
+        playersBody.innerHTML = players.map(p => `
+          <tr>
+            <td>${p.name}</td>
+            <td>${p.email || '-'}</td>
+            <td>${p.skill_level ?? '-'}</td>
+            <td>${new Date(p.created_at).toLocaleString()}</td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      window.location.href = '/auth/login.html';
+    });
+  </script>
+</body>
+</html>
+

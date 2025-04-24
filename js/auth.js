@@ -25,12 +25,34 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    alert('Login error: ' + error.message);
+  const { data: sessionData, error: loginError } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (loginError) {
+    alert('Login error: ' + loginError.message);
+    return;
+  }
+
+  alert('Login successful!');
+  document.getElementById('logout-btn').style.display = 'block';
+
+  // Role check
+  const { data: userInfo } = await supabase.auth.getUser();
+  const { data: roleData, error: roleError } = await supabase
+    .from('user_roles')
+    .select('is_admin')
+    .eq('id', userInfo.user.id)
+    .single();
+
+  if (roleError) {
+    console.error('Failed to fetch role:', roleError.message);
+  } else if (roleData.is_admin) {
+    alert('Welcome Admin! You have elevated access.');
+    // Optionally show admin-only UI elements
   } else {
-    alert('Login successful!');
-    document.getElementById('logout-btn').style.display = 'block';
+    alert('Welcome Player!');
   }
 });
 
