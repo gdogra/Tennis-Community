@@ -1,79 +1,89 @@
+/* auth.css */
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0f1e2d;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #0f1b2b;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
 .login-container {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
   display: flex;
-  max-width: 850px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  width: 800px;
+  height: 500px;
+  background: #f2f3f7;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-.animation-wrapper {
-  width: 50%;
-  background: #f0f4f8;
+.animation-panel {
+  flex: 1;
+  background-color: #0f1b2b;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form-wrapper {
-  width: 50%;
-  padding: 40px;
+.form-panel {
+  flex: 1;
+  padding: 60px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-h2 {
-  margin-bottom: 20px;
-  color: #111;
+.form-panel h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #222;
+  text-align: center;
 }
 
-input {
+input[type="email"],
+input[type="password"] {
   padding: 12px;
-  margin: 10px 0;
-  width: 100%;
-  border: 1px solid #ccc;
+  margin-bottom: 16px;
   border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-button {
+.login-btn {
   padding: 12px;
-  background-color: #007bff;
+  background-color: #007aff;
   color: white;
+  font-size: 16px;
   border: none;
-  width: 100%;
-  margin-top: 10px;
   border-radius: 6px;
   cursor: pointer;
+  width: 100%;
+  margin-bottom: 12px;
+  transition: background 0.3s ease;
 }
 
-#google-login {
+.login-btn:hover {
+  background-color: #005edb;
+}
+
+.google-login {
   background-color: #db4437;
+  color: white;
+  font-size: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
 }
 
-#login-feedback {
-  margin-top: 10px;
-  color: green;
-  transition: opacity 1s ease-out;
-}
-
-.fadeout {
-  animation: fadeOut 4s forwards;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  75% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
+.google-login:hover {
+  background-color: #c33d2e;
 }
 

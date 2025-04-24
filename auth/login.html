@@ -3,47 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login | Tennis Community</title>
+  <title>Login - Tennis Community</title>
   <link rel="stylesheet" href="/css/auth.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js" defer></script>
+  <script type="module" src="/js/auth.js" defer></script>
 </head>
 <body>
-  <div class="login-page">
-    <div class="login-container">
-      <!-- Lottie Animation -->
-      <div class="login-animation">
-        <div id="lottie-container" style="width: 250px; height: 250px;"></div>
-      </div>
+  <div class="login-container">
+    <!-- Left animation panel -->
+    <div class="animation-panel">
+      <lottie-player
+        src="/assets/tennis-serve-animation.json"
+        background="transparent"
+        speed="1"
+        style="width: 100%; height: 100%"
+        loop
+        autoplay>
+      </lottie-player>
+    </div>
 
-      <!-- Login Form -->
-      <div class="login-form">
-        <h2>Welcome Back</h2>
-        <form id="login-form">
-          <input type="email" id="login-email" placeholder="Email" autocomplete="email" required />
-          <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" required />
-          <button type="submit" class="btn-primary">Log In</button>
-        </form>
-        <button id="google-login" class="btn-google">Log in with Google</button>
-      </div>
+    <!-- Right login panel -->
+    <div class="form-panel">
+      <h2>Welcome Back</h2>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required autocomplete="email" />
+        <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password" />
+        <button type="submit" class="login-btn">Log In</button>
+      </form>
+
+      <button id="google-login-btn" class="google-login">Log in with Google</button>
     </div>
   </div>
-
-  <!-- JS Logic -->
-  <script src="/js/auth.js" type="module"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const container = document.getElementById("lottie-container");
-      if (container) {
-        lottie.loadAnimation({
-          container,
-          renderer: "svg",
-          loop: true,
-          autoplay: true,
-          path: "/assets/tennis-serve-animation.json"
-        });
-      }
-    });
-  </script>
 </body>
 </html>
 
