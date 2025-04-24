@@ -3,24 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Tennis Community</title>
+  <title>Login | Tennis Community</title>
   <link rel="stylesheet" href="/css/auth.css" />
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
 <body>
   <div class="login-container">
-    <div class="animation-wrapper">
-      <lottie-player src="/assets/login-animation.json" background="transparent" speed="1" loop autoplay></lottie-player>
+    <div class="animation-panel">
+      <lottie-player
+        src="/assets/tennis-serve-animation.json"
+        background="transparent"
+        speed="1"
+        loop
+        autoplay
+        style="width: 300px; height: 300px;"
+      ></lottie-player>
     </div>
-    <div class="form-wrapper">
+
+    <div class="form-panel">
       <h2>Welcome Back</h2>
+      
       <form id="login-form">
-        <input type="email" id="login-email" placeholder="Email" autocomplete="email" required />
-        <input type="password" id="login-password" placeholder="Password" autocomplete="current-password" required />
+        <input 
+          type="email" 
+          id="login-email" 
+          placeholder="Email" 
+          required 
+          autocomplete="email"
+          title="Enter your email address"
+        />
+        <input 
+          type="password" 
+          id="login-password" 
+          placeholder="Password" 
+          required 
+          autocomplete="current-password"
+          title="Enter your password"
+        />
         <button type="submit">Log In</button>
       </form>
-      <button id="google-login">Log in with Google</button>
-      <p id="login-feedback" class="fadeout"></p>
+
+      <button id="google-login" class="google-btn">
+        Log in with Google
+      </button>
+
+      <div class="separator">or</div>
+
+      <form id="signup-form">
+        <input 
+          type="email" 
+          id="signup-email" 
+          placeholder="Email" 
+          required 
+          autocomplete="email"
+          title="Enter your email address to register"
+        />
+        <input 
+          type="password" 
+          id="signup-password" 
+          placeholder="Password" 
+          required 
+          autocomplete="new-password"
+          title="Choose a strong password"
+        />
+        <button type="submit" class="signup-btn">Sign Up</button>
+      </form>
     </div>
   </div>
 
