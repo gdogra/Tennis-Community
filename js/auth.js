@@ -1,58 +1,47 @@
-// js/auth.js
-
-// Step 1: Make sure supabase-js is loaded
-// (you're already loading it via CDN in login.html)
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 const SUPABASE_URL = 'https://tvdiznpwmmimcwywaxew.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2ZGl6bnB3bW1pbWN3eXdheGV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTM4OTU3NzUsImV4cCI6MjAyOTQ3MTc3NX0.VEqX7UBOpXw1Nn5WmtZWKZRpN59nl3f3cDFTuXerN8g';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2ZGl6bnB3bW1pbWN3eXdheGV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NjQ0MDQsImV4cCI6MjA2MTA0MDQwNH0.btc5JdXafOs-eqEo828aAxWOf3iBCPqCO6DDFe0WjWc';
 
-// Step 2: Initialize supabase AFTER global 'supabase' is available
-document.addEventListener('DOMContentLoaded', () => {
-  const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  // Sign up
-  document.getElementById('signup-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('signup-email').value;
-    const password = document.getElementById('signup-password').value;
+// Sign Up
+document.getElementById('signup-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('signup-email').value;
+  const password = document.getElementById('signup-password').value;
 
-    const { error } = await client.auth.signUp({ email, password });
+  const { error } = await supabase.auth.signUp({ email, password });
+  if (error) {
+    alert('Sign-up error: ' + error.message);
+  } else {
+    alert('Signup successful! Please check your email to confirm.');
+  }
+});
 
-    if (error) {
-      alert('Sign-up error: ' + error.message);
-    } else {
-      alert('Check your email to confirm sign-up.');
-    }
-  });
+// Log In
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
 
-  // Log in
-  document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) {
+    alert('Login error: ' + error.message);
+  } else {
+    alert('Login successful!');
+    document.getElementById('logout-btn').style.display = 'block';
+  }
+});
 
-    const { error, data } = await client.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      alert('Login error: ' + error.message);
-    } else {
-      alert('Logged in as: ' + data.user.email);
-      document.getElementById('logout-btn').style.display = 'block';
-    }
-  });
-
-  // Log out
-  document.getElementById('logout-btn').addEventListener('click', async () => {
-    await client.auth.signOut();
-    alert('Logged out');
+// Log Out
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    alert('Logout error: ' + error.message);
+  } else {
+    alert('Logged out successfully');
     document.getElementById('logout-btn').style.display = 'none';
-  });
-
-  // Show logout if session exists
-  client.auth.getSession().then(({ data }) => {
-    if (data.session) {
-      document.getElementById('logout-btn').style.display = 'block';
-    }
-  });
+  }
 });
 
