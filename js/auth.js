@@ -1,32 +1,42 @@
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+// js/auth.js
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-const SUPABASE_URL = "https://tvdiznpwmmimcwywaxew.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."; // Truncated for security
+// 🛠 Supabase project values
+const SUPABASE_URL = 'https://tvdiznpwmmimcwywaxew.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Use your real full anon key here
+
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Handle form login
-document.getElementById("login-form").addEventListener("submit", async (e) => {
+// 🚀 Login with Email and Password
+document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const email = document.getElementById("login-email").value;
-  const password = document.getElementById("login-password").value;
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
 
-  const { error, data } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
 
   if (error) {
     alert(`Login error: ${error.message}`);
   } else {
-    alert("Login successful!");
+    alert('Login successful!');
+    // Redirect after login
     setTimeout(() => {
-      window.location.href = "/index.html";
-    }, 1200);
+      window.location.href = '/index.html';
+    }, 1000);
   }
 });
 
-// Google login
-document.getElementById("google-login-btn").addEventListener("click", async () => {
+// 🚀 Login with Google OAuth
+document.getElementById('google-login').addEventListener('click', async () => {
   const { error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
+    provider: 'google',
   });
-  if (error) alert(`Google Login Error: ${error.message}`);
+
+  if (error) {
+    alert(`Google login error: ${error.message}`);
+  }
 });
 

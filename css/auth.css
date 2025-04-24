@@ -1,89 +1,78 @@
-/* auth.css */
-
+/* css/auth.css */
 body {
   margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background-color: #0f1b2b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f1b2a;
+  color: #fff;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100vh;
 }
 
 .login-container {
   display: flex;
-  width: 800px;
-  height: 500px;
-  background: #f2f3f7;
+  gap: 40px;
+  background: #f2f2f2;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.animation-panel {
-  flex: 1;
-  background-color: #0f1b2b;
+.animation-box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.form-panel {
-  flex: 1;
-  padding: 60px 40px;
+.form-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px;
 }
 
-.form-panel h2 {
-  margin-bottom: 30px;
-  font-size: 28px;
-  color: #222;
-  text-align: center;
+.form-box h2 {
+  color: #111;
+  margin-bottom: 20px;
 }
 
 input[type="email"],
 input[type="password"] {
-  padding: 12px;
-  margin-bottom: 16px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 15px;
   width: 100%;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
 }
 
-.login-btn {
+button.btn {
   padding: 12px;
-  background-color: #007aff;
-  color: white;
-  font-size: 16px;
-  border: none;
+  width: 100%;
+  font-size: 1em;
   border-radius: 6px;
   cursor: pointer;
-  width: 100%;
-  margin-bottom: 12px;
-  transition: background 0.3s ease;
+  margin-top: 10px;
 }
 
-.login-btn:hover {
-  background-color: #005edb;
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
 }
 
-.google-login {
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-google {
   background-color: #db4437;
   color: white;
-  font-size: 15px;
-  padding: 12px;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 100%;
-  transition: background 0.3s ease;
 }
 
-.google-login:hover {
-  background-color: #c33d2e;
+.btn-google:hover {
+  background-color: #c1351d;
 }
 
